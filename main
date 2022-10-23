@@ -32,7 +32,9 @@ plot.ts(aapl_ts, xlim = c(0, 1200), ylim = c(50,200))
 points(aapl_forecast_values , type = "l", col = "red")
 
 
+chart_Series(AAPL)
 
+chart_Series(AAPL[0:100,])
 
 
 
