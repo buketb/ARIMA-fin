@@ -1,4 +1,44 @@
 
+
+install.packages("tidyquant")
+library(tidyquant)
+library(quantmod)
+require(zoo)
+require(xts)
+
+
+getSymbols("AAPL", from = '2018-01-01',
+           to = "2022-10-21",warnings = FALSE,
+           auto.assign = TRUE)
+
+plot(AAPL$AAPL.Close)
+
+aapl_ts <- AAPL$AAPL.Close
+
+
+adf.test(aapl_ts)
+acf(aapl_ts)
+pacf(aapl_ts)
+
+aapl_fit <- arima(aapl_ts, order = c(1, 1, 0))
+
+aapl_forecast <- predict(aapl_fit , n.ahead = 20)
+
+aapl_forecast_values <- aapl_forecast$pred
+aapl_forecast_se <- aapl_forecast$se
+
+plot.ts(aapl_ts)
+plot.ts(aapl_ts, xlim = c(0, 1200), ylim = c(50,200))
+points(aapl_forecast_values , type = "l", col = "red")
+
+
+
+
+
+
+
+
+##############
 plot(fb_ts, main="Facebook Stock Prices", col=4)
 
 
