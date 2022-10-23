@@ -1,0 +1,17 @@
+
+plot(fb_ts, main="Facebook Stock Prices", col=4)
+
+
+adf.test(fb_ts)
+acf(fb_ts)
+pacf(fb_ts)
+
+fb_fit <- arima(fb_ts, order = c(1, 1, 0))
+
+fb_forecast <- predict(fb_fit , n.ahead = 20)
+
+fb_forecast_values <- fb_forecast$pred
+fb_forecast_se <- fb_forecast$se
+
+plot.ts(fb_ts, xlim = c(0, 1100), ylim = c(50,210))
+points(fb_forecast_values , type = "l", col = "red")
